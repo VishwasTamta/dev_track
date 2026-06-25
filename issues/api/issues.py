@@ -10,19 +10,22 @@ def create_issue(request):
         "title": request.data.get("title"),
         "description": request.data.get("description"),
         "priority": request.data.get("priority"),
-        # TODO: fix logic for getting reporter id. 
+        # TODO: fix logic for getting reporter id.
         "reporter_id": "temp id for now",
-        "status": "open"
+        "status": "open",
     }
 
-    if data["priority"] == "critical":
-        issue = CriticalIssue(**data)
-    elif data["priority"] == "low":
-        issue = LowPriorityIssue(**data)
-    else:
-        issue = Issue(**data)
+    try:
+        if data["priority"] == "critical":
+            issue = CriticalIssue(**data)
+        elif data["priority"] == "low":
+            issue = LowPriorityIssue(**data)
+        else:
+            issue = Issue(**data)
 
-    return Response(
-        issue.to_dict(),
-        status=201
-    )
+        issue.validate()
+
+        return Response(issue.to_dict(), status=201)
+    
+    except ValueError as e:
+        return Response({"error": str(e)}, status=400)
