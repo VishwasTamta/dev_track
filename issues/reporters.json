@@ -1,0 +1,20 @@
+[
+    {
+        "id": "503a8536-1ee6-4a48-868d-b2f974fec970",
+        "name": "John Doe",
+        "email": "email@example.com",
+        "team": "backend"
+    },
+    {
+        "id": "af4f7323-5348-4e60-a607-289fdbba76a9",
+        "name": "John Does",
+        "email": "email@example.com",
+        "team": "backend"
+    },
+    {
+        "id": "59998236-6430-4be5-890a-ecb142f61b91",
+        "name": "Vishwas",
+        "email": "email@example.com",
+        "team": "backend"
+    }
+]

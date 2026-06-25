@@ -1,0 +1,8 @@
+POST http://127.0.0.1:8000/api/reporters
+Content-Type: application/json
+
+{
+   "name": "John Doe",
+   "email": "email@example.com",
+   "team": "backend"
+}

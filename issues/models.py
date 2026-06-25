@@ -18,22 +18,55 @@ class BaseEntity(ABC):
             for key, value in self.__dict__.items()
         }
 
-class Reporter(BaseEntity): 
+class Validate_enum:
+    def validate_enum(self, value, enum_class, field_name):
+        try:
+            enum_class(value)
+        except ValueError:
+            valid = [e.value for e in enum_class]
+            raise ValueError(
+                f"Invalid {field_name} '{value}'. "
+                f"Must be one of {valid}"
+            )
+
+class Reporter(BaseEntity, Validate_enum): 
+
+    class Team(Enum):
+        BACKEND = "backend"
+        FRONTEND = "frontend"
+        DEVOPS = "devops"
+
     
     def __init__(self, name, email, team):
         self.id = str(uuid.uuid4())
         self.name = name
         self.email = email
         self.team = team
+        
+    def _validate_required_fields(self):
+
+        errors = {}
+
+        if not self.name:
+            errors["name"] = "This field is required."
+
+        if not self.email:
+            errors["email"] = "This field is required."
+        elif '@' not in self.email:
+            errors["email"] = "Invalid email"
+        
+        if not self.team:
+            errors["team"] = "This field is required"
+
+        if errors:
+            raise ValueError(errors)
 
     def validate(self):
-        if not self.name:
-            raise ValueError("Name cannot be empty")
-        if '@' not in self.email:
-            raise ValueError('Invalid email')
+        self._validate_required_fields()
+        super().validate_enum(self.team, self.Team, "team")
 
 
-class Issue(BaseEntity):
+class Issue(BaseEntity, Validate_enum):
     class Status(Enum):
         OPEN = "open"
         IN_PROGRESS = "in_progress"
@@ -55,15 +88,6 @@ class Issue(BaseEntity):
         self.reporter_id = reporter_id
         self.created_at = datetime.now(timezone.utc)
 
-    def _validate_enum(self, value, enum_class, field_name):
-        try:
-            enum_class(value)
-        except ValueError:
-            valid = [e.value for e in enum_class]
-            raise ValueError(
-                f"Invalid {field_name} '{value}'. "
-                f"Must be one of {valid}"
-            )
 
     def _validate_required_fields(self):
 
@@ -90,8 +114,8 @@ class Issue(BaseEntity):
     
     def validate(self):
         self._validate_required_fields()
-        self._validate_enum(self.status, self.Status, "status")
-        self._validate_enum(self.priority, self.Priority, "priority")
+        super().validate_enum(self.status, self.Status, "status")
+        super().validate_enum(self.priority, self.Priority, "priority")
     
     def describe(self):
         return f"{self.title} [{self.priority}]"

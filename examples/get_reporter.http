@@ -1,0 +1,1 @@
+GET http://127.0.0.1:8000/api/reporters?id=af4f7323-5348-4e60-a607-289fdbba76a9
