@@ -1,65 +1,47 @@
 [
     {
-        "id": "31b97087-3c79-4d5f-a532-fe344e6ec0aa",
-        "title": "Title of the issue",
-        "description": "Description of the issue",
-        "status": "open",
-        "priority": "low",
-        "reporter_id": "temp id for now",
-        "created_at": "2026-06-25T15:59:49.464682+00:00"
-    },
-    {
-        "id": "9cbd0741-bdfd-485e-888c-05d7a3c3d464",
-        "title": "Title of the issue",
-        "description": "Description of the issue",
-        "status": "closed",
-        "priority": "low",
-        "reporter_id": "temp id for now",
-        "created_at": "2026-06-25T15:59:59.685376+00:00"
-    },
-    {
-        "id": "80f2d841-4de4-4e51-9588-0d89f4ceb430",
-        "title": "Title of the issue",
-        "description": "Description of the issue",
-        "status": "open",
-        "priority": "low",
-        "reporter_id": "temp id for now",
-        "created_at": "2026-06-25T16:00:32.618125+00:00"
-    },
-    {
-        "id": "19734c3a-e3c2-4daf-a6dd-4acc4a52622a",
-        "title": "Title of the issue1",
-        "description": "Description of the issue",
-        "status": "closed",
-        "priority": "low",
-        "reporter_id": "temp id for now",
-        "created_at": "2026-06-25T16:10:13.474388+00:00"
-    },
-    {
-        "id": "06893927-52a4-4326-a6c2-cb0ce08aeeff",
-        "title": "Title of the issue2",
-        "description": "Description of the issue",
-        "status": "open",
-        "priority": "low",
-        "reporter_id": "temp id for now",
-        "created_at": "2026-06-25T16:10:16.922138+00:00"
-    },
-    {
-        "id": "3e0be10c-301f-4af7-8a24-8a4ee10d7c17",
-        "title": "Title of the issue",
-        "description": " of the issue",
-        "status": "open",
-        "priority": "low",
-        "reporter_id": "temp id for now",
-        "created_at": "2026-06-25T16:42:17.387573+00:00"
-    },
-    {
-        "id": "956d4c14-3eca-4a12-a20e-576802ebf9c7",
+        "id": "f7b865fb-8fa4-49d4-a321-827c8533799e",
         "title": "Title of the issue",
         "description": "Description of the issue",
         "status": "open",
         "priority": "low",
         "reporter_id": "59998236-6430-4be5-890a-ecb142f61b91",
-        "created_at": "2026-06-25T17:01:23.790025+00:00"
+        "created_at": "2026-06-25T17:13:25.593886+00:00"
+    },
+    {
+        "id": "8bb40dad-2ad0-4ac1-98e3-f861bd189c47",
+        "title": "Title of the issue 2",
+        "description": "Description of the issue",
+        "status": "open",
+        "priority": "low",
+        "reporter_id": "59998236-6430-4be5-890a-ecb142f61b91",
+        "created_at": "2026-06-25T17:14:20.609853+00:00"
+    },
+    {
+        "id": "ec1ddb90-fb8b-4e75-8208-943dcf1ef2d2",
+        "title": "Title of the issue 4",
+        "description": "Description of the issue",
+        "status": "open",
+        "priority": "low",
+        "reporter_id": "59998236-6430-4be5-890a-ecb142f61b91",
+        "created_at": "2026-06-25T17:16:00.288609+00:00"
+    },
+    {
+        "id": "1adc497d-8dfb-4a3c-9b87-02568ec060e7",
+        "title": "Title of the issue 4",
+        "description": "Description of the issue",
+        "status": "closed",
+        "priority": "low",
+        "reporter_id": "59998236-6430-4be5-890a-ecb142f61b91",
+        "created_at": "2026-06-25T17:17:13.890015+00:00"
+    },
+    {
+        "id": "85446623-4606-4b9a-b714-1d3763eeb67c",
+        "title": "Title of the issue 5",
+        "description": "Description of the issue",
+        "status": "closed",
+        "priority": "low",
+        "reporter_id": "59998236-6430-4be5-890a-ecb142f61b91",
+        "created_at": "2026-06-25T17:18:00.577897+00:00"
     }
 ]

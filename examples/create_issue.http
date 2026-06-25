@@ -2,8 +2,9 @@ POST http://127.0.0.1:8000/api/issues
 Content-Type: application/json
 
 {
-   "title": "Title of the issue",
+   "title": "Title of the issue 5",
    "description": "Description of the issue",
    "priority": "low",
-   "reporter_id": "59998236-6430-4be5-890a-ecb142f61b91"
+   "reporter_id": "59998236-6430-4be5-890a-ecb142f61b91",
+   "status": "wrongStatus"
 }

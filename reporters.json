@@ -1,24 +1,12 @@
 [
     {
-        "id": "503a8536-1ee6-4a48-868d-b2f974fec970",
+        "id": "c87096e4-23fb-45e5-982f-a4bdeeeb4d27",
         "name": "John Doe",
         "email": "email@example.com",
         "team": "backend"
     },
     {
-        "id": "af4f7323-5348-4e60-a607-289fdbba76a9",
-        "name": "John Does",
-        "email": "email@example.com",
-        "team": "backend"
-    },
-    {
-        "id": "59998236-6430-4be5-890a-ecb142f61b91",
-        "name": "Vishwas",
-        "email": "email@example.com",
-        "team": "backend"
-    },
-    {
-        "id": "ce4b48d3-4fbb-4014-8955-c02b6f9536b3",
+        "id": "8b5e348d-08ae-4077-8d06-817ff4c73d48",
         "name": "John Doe",
         "email": "email@example.com",
         "team": "backend"

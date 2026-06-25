@@ -55,7 +55,7 @@ def create_new_issue(request, issues_data):
         "description": request.data.get("description"),
         "priority": request.data.get("priority"),
         "reporter_id": request.data.get("reporter_id"),
-        "status": "open",
+        "status": request.data.get("status"),
     }
 
     issue = create_issue(data)
