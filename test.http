@@ -2,5 +2,7 @@ POST http://127.0.0.1:8000/api/issues
 Content-Type: application/json
 
 {
-
+   "title": "Title of the issue",
+   "description": "Description of the issue",
+   "priority": "low"
 }

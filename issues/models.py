@@ -65,11 +65,31 @@ class Issue(BaseEntity):
                 f"Must be one of {valid}"
             )
 
+    def _validate_required_fields(self):
+
+        errors = {}
+
+        if not self.title:
+            errors["title"] = "This field is required."
+
+        if not self.description:
+            errors["description"] = "This field is required."
+
+        if not self.priority:
+            errors["priority"] = "This field is required."
+
+        if not self.status:
+            errors["status"] = "This field is required."
+
+        if not self.reporter_id:
+            errors["reporter_id"] = "This field is required."
+
+        if errors:
+            raise ValueError(errors)
+
     
     def validate(self):
-        if not self.title:
-            raise ValueError("Title cannot be empty")
-
+        self._validate_required_fields()
         self._validate_enum(self.status, self.Status, "status")
         self._validate_enum(self.priority, self.Priority, "priority")
     
