@@ -1,0 +1,85 @@
+from django.db import models
+
+# Create your models here.
+from abc import ABC, abstractmethod
+from enum import Enum
+from datetime import datetime, timezone
+import uuid
+
+class BaseEntity(ABC):
+    
+    @abstractmethod
+    def validate(self):
+        pass
+
+    def to_dict(self):
+        return {
+            key: value
+            for key, value in self.__dict__.items()
+        }
+
+class Reporter(BaseEntity): 
+    
+    def __init__(self, name, email, team):
+        self.id = str(uuid.uuid4())
+        self.name = name
+        self.email = email
+        self.team = team
+
+    def validate(self):
+        if not self.name:
+            raise ValueError("Name cannot be empty")
+        if '@' not in self.email:
+            raise ValueError('Invalid email')
+
+
+class Issue(BaseEntity):
+    class Status(Enum):
+        OPEN = "open"
+        IN_PROGRESS = "in_progress"
+        RESOLVED = "resolved"
+        CLOSED = "closed"
+
+    class Priority(Enum):
+        LOW = "low"
+        MEDIUM = "medium"
+        HIGH = "high"
+        CRITICAL = "critical"
+
+    def __init__(self, title, description, status, priority, reporter_id):
+        self.id = str(uuid.uuid4())
+        self.title = title
+        self.description = description
+        self.status = status
+        self.priority = priority
+        self.reporter_id = reporter_id
+        self.created_at = datetime.now(timezone.utc)
+
+    def _validate_enum(self, value, enum_class, field_name):
+        try:
+            enum_class(value)
+        except ValueError:
+            valid = [e.value for e in enum_class]
+            raise ValueError(
+                f"Invalid {field_name} '{value}'. "
+                f"Must be one of {valid}"
+            )
+
+    
+    def validate(self):
+        if not self.title:
+            raise ValueError("Title cannot be empty")
+
+        self._validate_enum(self.status, self.Status, "status")
+        self._validate_enum(self.priority, self.Priority, "priority")
+    
+    def describe(self):
+        return f"{self.title} [{self.priority}]"
+
+class CriticalIssue(Issue):
+    def describe(self):
+        return f"[URJENT] {self.title} - needs immediate attention"
+    
+class LowPriorityIssue(Issue):
+    def describe(self):
+        return f"{self.title} - low priority, handle when free"
