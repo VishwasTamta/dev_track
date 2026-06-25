@@ -15,7 +15,41 @@ def issues(request):
             issues = json.load(f)
         
         if request.method == "GET":
-            return Response(issues, status=200)
+
+            query_issue_id = request.query_params.get("id")
+            if query_issue_id is None:
+                query_issue_status = request.query_params.get("status")
+                if query_issue_status is None:
+                    return Response(issues, status=200)
+                
+                filtered_issues = [
+                    issue
+                    for issue in issues
+                    if issue["status"] == query_issue_status
+                ]
+
+                if not filtered_issues:
+                    return Response(
+                        {"error": "No Issues found"},
+                        status=404
+                    )
+
+                return Response(filtered_issues, status=200)
+                    
+            
+            issue = next(
+                (i for i in issues if str(i["id"]) == query_issue_id),
+                None
+            )
+
+            if not issue:
+                return Response(
+                    {"error": "Issue not found"},
+                    status=404
+                ) 
+
+            return Response(issue, status=200)
+
 
         if request.method == "POST":
 

@@ -12,7 +12,7 @@
         "id": "9cbd0741-bdfd-485e-888c-05d7a3c3d464",
         "title": "Title of the issue",
         "description": "Description of the issue",
-        "status": "open",
+        "status": "closed",
         "priority": "low",
         "reporter_id": "temp id for now",
         "created_at": "2026-06-25T15:59:59.685376+00:00"
@@ -25,5 +25,23 @@
         "priority": "low",
         "reporter_id": "temp id for now",
         "created_at": "2026-06-25T16:00:32.618125+00:00"
+    },
+    {
+        "id": "19734c3a-e3c2-4daf-a6dd-4acc4a52622a",
+        "title": "Title of the issue1",
+        "description": "Description of the issue",
+        "status": "closed",
+        "priority": "low",
+        "reporter_id": "temp id for now",
+        "created_at": "2026-06-25T16:10:13.474388+00:00"
+    },
+    {
+        "id": "06893927-52a4-4326-a6c2-cb0ce08aeeff",
+        "title": "Title of the issue2",
+        "description": "Description of the issue",
+        "status": "open",
+        "priority": "low",
+        "reporter_id": "temp id for now",
+        "created_at": "2026-06-25T16:10:16.922138+00:00"
     }
 ]
