@@ -43,5 +43,23 @@
         "priority": "low",
         "reporter_id": "temp id for now",
         "created_at": "2026-06-25T16:10:16.922138+00:00"
+    },
+    {
+        "id": "3e0be10c-301f-4af7-8a24-8a4ee10d7c17",
+        "title": "Title of the issue",
+        "description": " of the issue",
+        "status": "open",
+        "priority": "low",
+        "reporter_id": "temp id for now",
+        "created_at": "2026-06-25T16:42:17.387573+00:00"
+    },
+    {
+        "id": "956d4c14-3eca-4a12-a20e-576802ebf9c7",
+        "title": "Title of the issue",
+        "description": "Description of the issue",
+        "status": "open",
+        "priority": "low",
+        "reporter_id": "59998236-6430-4be5-890a-ecb142f61b91",
+        "created_at": "2026-06-25T17:01:23.790025+00:00"
     }
 ]

@@ -1,80 +1,80 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
 from issues.models import Issue, CriticalIssue, LowPriorityIssue
-import json
-from pathlib import Path
+from utils.json_utils import load_json, save_json
 
-@api_view(["POST", "GET"])
+
+@api_view(["GET", "POST"])
 def issues(request):
-    
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    json_path = BASE_DIR / "issues.json"
     try:
+        issues_data = load_json("issues.json")
 
-        with open(json_path, "r") as f:
-            issues = json.load(f)
-        
         if request.method == "GET":
+            return get_issues(request, issues_data)
 
-            query_issue_id = request.query_params.get("id")
-            if query_issue_id is None:
-                query_issue_status = request.query_params.get("status")
-                if query_issue_status is None:
-                    return Response(issues, status=200)
-                
-                filtered_issues = [
-                    issue
-                    for issue in issues
-                    if issue["status"] == query_issue_status
-                ]
+        return create_new_issue(request, issues_data)
 
-                if not filtered_issues:
-                    return Response(
-                        {"error": "No Issues found"},
-                        status=404
-                    )
-
-                return Response(filtered_issues, status=200)
-                    
-            
-            issue = next(
-                (i for i in issues if str(i["id"]) == query_issue_id),
-                None
-            )
-
-            if not issue:
-                return Response(
-                    {"error": "Issue not found"},
-                    status=404
-                ) 
-
-            return Response(issue, status=200)
-
-
-        if request.method == "POST":
-
-            data = {
-                "title": request.data.get("title"),
-                "description": request.data.get("description"),
-                "priority": request.data.get("priority"),
-                # TODO: fix logic for getting reporter id.
-                "reporter_id": "temp id for now",
-                "status": "open",
-            }
-
-            if data["priority"] == "critical":
-                issue = CriticalIssue(**data)
-            elif data["priority"] == "low":
-                issue = LowPriorityIssue(**data)
-            else:
-                issue = Issue(**data)
-            issue.validate()
-
-            issues.append(issue.to_dict())
-            with open(json_path, "w") as f:
-                json.dump(issues, f, indent=4)
-
-            return Response(issue.to_dict(), status=201)
-    
     except ValueError as e:
         return Response({"error": str(e)}, status=400)
+
+
+def get_issues(request, issues_data):
+    issue_id = request.query_params.get("id")
+    status_filter = request.query_params.get("status")
+
+    if issue_id:
+        issue = next(
+            (issue for issue in issues_data if str(issue["id"]) == issue_id),
+            None,
+        )
+
+        if issue is None:
+            return Response({"error": "Issue not found"}, status=404)
+
+        return Response(issue)
+
+    if status_filter:
+        filtered = [
+            issue
+            for issue in issues_data
+            if issue.get("status") == status_filter
+        ]
+
+        if not filtered:
+            return Response({"error": "No issues found"}, status=404)
+
+        return Response(filtered)
+
+    return Response(issues_data)
+
+
+def create_new_issue(request, issues_data):
+    data = {
+        "title": request.data.get("title"),
+        "description": request.data.get("description"),
+        "priority": request.data.get("priority"),
+        "reporter_id": request.data.get("reporter_id"),
+        "status": "open",
+    }
+
+    issue = create_issue(data)
+    issue.validate()
+
+    issue_dict = issue.to_dict()
+
+    issues_data.append(issue_dict)
+    save_json("issues.json", issues_data)
+
+    return Response(issue_dict, status=201)
+
+
+def create_issue(data):
+    priority = data.get("priority")
+
+    issue_class = {
+        "critical": CriticalIssue,
+        "low": LowPriorityIssue,
+    }.get(priority, Issue)
+
+    return issue_class(**data)
