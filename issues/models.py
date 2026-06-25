@@ -78,6 +78,12 @@ class Issue(BaseEntity, Validate_enum):
         MEDIUM = "medium"
         HIGH = "high"
         CRITICAL = "critical"
+    
+    def to_dict(self):
+        return {
+            key: value.isoformat() if isinstance(value, datetime) else value
+            for key, value in self.__dict__.items()
+        }
 
     def __init__(self, title, description, status, priority, reporter_id):
         self.id = str(uuid.uuid4())
